@@ -33,7 +33,7 @@ class ChatClient(object):
         try:
             self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             self.sock.connect((host, self.port))
-            print 'Connected to chat server %s:%d' % (self.host, self.port)
+            print ('Connected to chat server %s:%d' % (self.host, self.port))
             # Send my pubkey...
             send(self.sock, client_pubkey.exportKey())
             server_pubkey = receive(self.sock)
@@ -49,7 +49,7 @@ class ChatClient(object):
             self.prompt = '[' + '@'.join((self.name, addr)) + ']> '
 
         except socket.error:
-            print 'Could not connect to chat server @%d' % self.port
+            print ('Could not connect to chat server @%d' % self.port)
             sys.exit(1)
 
     def cmdloop(self):
@@ -81,7 +81,7 @@ class ChatClient(object):
                             data = '%s#^[[%s' % (data, signature)
 
                         except ValueError:
-                            print 'Too large text, cannot encrypt, not sending.'
+                            print ('Too large text, cannot encrypt, not sending.')
                             data = None
 
                         if data:
@@ -91,7 +91,7 @@ class ChatClient(object):
                         data = receive(self.sock)
 
                         if not data:
-                            print 'Shutting down.'
+                            print ('Shutting down.')
                             self.flag = True
                             break
 
@@ -105,7 +105,7 @@ class ChatClient(object):
                             sys.stdout.flush()
 
             except KeyboardInterrupt:
-                print 'Interrupted.'
+                print ('Interrupted.')
                 self.sock.close()
                 break
 
