@@ -29,11 +29,11 @@ class ChatServer(object):
         self.server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         self.server.bind((address, int(port)))
 
-        print 'Generating RSA keys ...'
+        print ('Generating RSA keys ...')
         self.server_privkey = RSA.generate(4096, os.urandom)
         self.server_pubkey = self.server_privkey.publickey()
 
-        print 'Listening to port', port, '...'
+        print ('Listening to port', port, '...')
         self.server.listen(5)
 
         # Trap keyboard interrupts
@@ -41,7 +41,7 @@ class ChatServer(object):
 
     def sighandler(self, signum, frame):
         # Close the server
-        print 'Shutting down server...'
+        print ('Shutting down server...')
 
         # Close existing client sockets
         for o in self.outputs:
@@ -100,7 +100,7 @@ class ChatServer(object):
                 if s == self.server:
                     # handle the server socket
                     client, address = self.server.accept()
-                    print 'chatserver: got connection %d from %s' % (client.fileno(), address)
+                    print ('chatserver: got connection %d from %s' % (client.fileno(), address))
                     # Get client public key and send our public key
                     pubkey = RSA.importKey(receive(client))
                     send(client, self.server_pubkey.exportKey())
@@ -164,7 +164,7 @@ class ChatServer(object):
 
                         else:
 
-                            print 'Chatserver: Client %d hung up' % s.fileno()
+                            print ('Chatserver: Client %d hung up' % s.fileno())
                             self.clients -= 1
                             s.close()
                             inputs.remove(s)
