@@ -30,6 +30,8 @@ For clients:
 
 Note:
 -----
+Cloned this code from https://github.com/lunemec/python-chat and fixed some missing parenthesis in print calls. Otherwise, I have not change anything. Note from original author:
+
 I found a simple chatserver recipe on the internet with some bugs. I fixed most of them,
 added a encryption and message signing. If there are some bugs, you can report them to me,
 but no promisses :)
